@@ -18,3 +18,21 @@
                 on_release: print("Зменшити")
         Button:
             text: "123"
+            on_press: root.gclick2()
+
+<FirstScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        Button:
+            size_hint: 0.5, 0.5
+            pos_hint: {"center_x": 0.5, "top_y": 1}
+            text: "почати гру"
+            on_press: root.click()
+        Button:
+            size_hint: 0.5, 0.5
+            pos_hint: {"center_x": 0.5, "top_y": 1}
+            text: "настройки"
+        Button:
+            size_hint: 0.5, 0.5
+            pos_hint: {"center_x": 0.5, "top_y": 1}
+            text: "вихід"
