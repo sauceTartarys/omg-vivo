@@ -2,6 +2,7 @@
     BoxLayout:
         orientation: "vertical"
         Label:
+            id: score_lbl
             text: "Рахунок"
         FloatLayout:
             Image:
@@ -18,7 +19,7 @@
                 on_release: print("Зменшити")
         Button:
             text: "123"
-            on_press: root.gclick2()
+            on_press: root.gclick()
 
 <FirstScreen>:
     BoxLayout:
@@ -36,3 +37,57 @@
             size_hint: 0.5, 0.5
             pos_hint: {"center_x": 0.5, "top_y": 1}
             text: "вихід"
+        Button:
+            text: 'Магазин'
+            on_press: root.swich_to_shop()
+
+
+<MenuScreen>:
+    Button:
+
+<ShopScreen>:
+    FloatLayout:
+        Image:
+            source: 'img_1.png'
+            allow_stretch: True
+            keep_ratio: False
+        BoxLayout:
+            orientation: "vertical"
+            BoxLayout:
+                orientation: "horizontal"
+                size_hint: 1, 0.2
+                Button:
+                    text: "Назад"
+                Label:
+                    text: "Рахунок"
+            ScrollView:
+                size_hint_y: None
+                size_hint: 1, 1
+                GridLayout:
+                    id: shopItems
+                    size_hint_y: None
+                    height: self.minimum_height
+                    cols: 1
+                    row_default_height: 100
+                    FloatLayout:
+                        Button:
+                            size_hint: 1, 1
+                            pos_hint: {'center_x': 0.5, 'center_y':0.5}
+                            on_press: print("купити")
+
+                        Image:
+                            size_hint: 0.1, 1
+                            pos_hint: {'x': 0, 'center_y':0.5}
+                            source: 'ball.png'
+
+                    FloatLayout:
+                        Button:
+                            size_hint: 1, 1
+                            pos_hint: {'center_x': 0.5, 'center_y':0.5}
+                            on_press: print("купити")
+
+                        Image:
+                            size_hint: 0.1, 1
+                            pos_hint: {'x': 0, 'center_y':0.5}
+                            source: 'img.png'
+
