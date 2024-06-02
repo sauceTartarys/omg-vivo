@@ -1,66 +1,83 @@
+from kivy.app import App
+from kivy.uix.screenmanager import ScreenManager , Screen
 import json
 
-from kivy.app import App
-from kivy.uix.screenmanager import ScreenManager, Screen
-
-player = {
+dotas = {
     "score": 0,
-    "power": 1
+    "power":1,
 }
+
 def read_data():
-    global player
+    global dotas
     try:
-        with open("play.json", "r", encoding="utf-8") as file:
-            player = json.load(file)
+        with open("play.json" , "r" , encoding="UTF-8") as file:
+            dotas = json.load(file)
     except:
-        print("невдача((((((")
+        print("eroor")
 
 def save_data():
-    global player
+    global dotas
     try:
-        with open("play.json", "w", encoding="utf-8") as file:
-            json.dump(player, file, indent=4, ensure_ascii=True)
+        with open("play.json" , "w" , encoding="UTF-8") as file:
+            json.dump(dotas , file , indent=3 , ensure_ascii=True)
     except:
-        print("невдача((((((")
+        print("eroor")
+
 class MainScreen(Screen):
-    def __init__(self, **kw):
+    def __init__(self , **kw):
         super().__init__(**kw)
     def on_enter(self, *args):
         read_data()
-        self.ids.score_lbl.text = "рахунок: " + str(player["score"])
+        self.ids.score_lbl.text = 'рахунок: ' +str(dotas["score"])
+    def go_to_first(self):
+        self.manager.current = "first"
+
+
 
     def gclick(self):
-        self.ids.ball.size_hint = (1, 1)
-        self.ids.ball.pos_hint = {"center_x": 0.5, "top": 1}
+        self.ids.ball.size_hint = (1 ,1)
+        self.ids.ball.pos_hint = {"center_x": 0.5 , "top": 1}
         read_data()
-        player["score"] += player["power"]
-        self.ids.scorelabel.text = 'рахунок: ' + str(player["score"])
+        dotas["score"] +=  dotas["power"]
+        self.ids.scorelabel.text = 'рахунок: ' + str(dotas["score"])
         save_data()
 
-    def click(self):
-        self.ids.ball.size_hint = (10.5, 10.5)
-        read_data()
-        player["score"] += player["power"]
-        self.ids.score_lbl.text = "рахунок: "+str(player["score"])
-        save_data()
+    def noc(self):
+        self.ids.ball.size_hint = (1.2 ,1.2)
+        self.ids.ball.pos_hint = {"center_x": 0.5, "top": 1.2}
 
-    def switch_to_shop(self):
-        self.manager.current = 'shop'
+    def gclick2(self):
+        self.manager.current = "first"
 
-class MenuSreen(Screen):
-    def __init__(self, **kw):
+class FirstScreen(Screen):
+    def __init__(self , **kw):
         super().__init__(**kw)
+    def click(self):
+        self.manager.current = "main"
+
+    def click2(self):
+        self.manager.current = "second"
 
 
 class ShopScreen(Screen):
     def __init__(self, **kw):
         super().__init__(**kw)
 
+class SecondScreen(Screen):
+    def __init__(self , **kw):
+        super().__init__(**kw)
+
+    def buy(self):
+        self.manager.current = 'shop'
+
+
+
 class ClickerApp(App):
     def build(self):
         sm = ScreenManager()
-        #sm.add_widget(MenuSreen(name='menu'))
+        sm.add_widget(FirstScreen(name = 'first'))
         sm.add_widget(MainScreen(name='main'))
+        sm.add_widget(SecondScreen(name='second'))
         sm.add_widget(ShopScreen(name='shop'))
         return sm
 

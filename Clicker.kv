@@ -18,8 +18,13 @@
                 on_press: root.click()
                 on_release: print("Зменшити")
         Button:
-            text: "123"
-            on_press: root.gclick()
+            size_hint: 0.5, 1
+            background_color:1,0,0,1
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            on_press: root.go_to_first()
+            on_release: print("назад")
+            text: ("назад")
+
 
 <FirstScreen>:
     BoxLayout:
@@ -33,13 +38,14 @@
             size_hint: 0.5, 0.5
             pos_hint: {"center_x": 0.5, "top_y": 1}
             text: "настройки"
+            on_press: root.buy
         Button:
             size_hint: 0.5, 0.5
             pos_hint: {"center_x": 0.5, "top_y": 1}
             text: "вихід"
-        Button:
-            text: 'Магазин'
-            on_press: root.swich_to_shop()
+
+
+
 
 
 <MenuScreen>:
@@ -90,4 +96,21 @@
                             size_hint: 0.1, 1
                             pos_hint: {'x': 0, 'center_y':0.5}
                             source: 'img.png'
+                    FloatLayout:
+                        Image:
+                            source: "img_1.png"
+                            allow_stretch: True
+                            keep_ratio: False
+                            size_hint: 0.5 , 0.5
+                            pos_hint: {"center_x": 0.5 , "top": 0.5}
+                        Button:
+                            size_hint: 0.5 , 0.5
+                            pos_hint: {"center_x": 0.5 , "top": 0.5}
+                            text : "почати гру"
+                            background_color: 1 ,0, 0 ,0
+                            on_press : root.click()
+<SecondScreen>:
+    Button:
+
+        on_press: root.buy()
 
